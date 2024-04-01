@@ -5,7 +5,7 @@
 
         <h1>Crea nuovo Progetto</h1>
        
-        <form action="{{route('dashboard.projects.store') }}" method="POST">
+        <form action="{{route('dashboard.projects.store') }}" method="POST" enctype="multipart/form-data">
 
             @csrf
 
@@ -24,14 +24,17 @@
             </div>
 
             <div class="mb-3">
+                <input
+                type="file"
+                name="cover_image"
+                id="cover_image"
+                class="form-control
+                    @error('cover_image') is-invalid @enderror">
+            </div>
+
+            <div class="mb-3">
                 <label for="title" class="form-label">Content</label>
-                <textarea
-                    type="text" 
-                    class="form-control"
-                    name="content"
-                    id="content"
-                    rows="3">
-                </textarea>
+                <textarea type="text" class="form-control" name="content" id="content" rows="3"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Crea</button>
