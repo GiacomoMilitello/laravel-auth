@@ -3,9 +3,9 @@
 @section('content')
     <main class="container py-3">
 
-        <h1>Modifica Progetto</h1>
+        <h1>Modifica {{ $project->title }}</h1>
        
-        <form action="{{route('dashboard.projects.update', $project->slug ) }}" method="POST">
+        <form action="{{route('dashboard.projects.update', $project->slug ) }}" method="POST" enctype="multipart/form-data">
 
             @csrf
             @method('PUT')
@@ -23,6 +23,25 @@
                     value="{{ old('title', $project->title) }}"
                     required
                 />
+            </div>
+
+            <div class="mb-3">
+                @if( $project->cover_image)
+                    <img
+                        src="{{ asset('/storage/' . $project->cover_image) }}"
+                        alt="{{ $project->title }}"
+                    >
+                @endif
+
+                <div class="mt-3">
+                    <label for="cover_image">Carica immagine</label>
+                    <input
+                    type="file"
+                    name="cover_image"
+                    id="cover_image"
+                    class="form-control
+                        @error('cover_image') is-invalid @enderror">
+                </div>
             </div>
 
             <div class="mb-3">
